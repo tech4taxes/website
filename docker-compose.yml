@@ -3,8 +3,26 @@ services:
     image: jwilder/nginx-proxy
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+    labels:
+      - "com.github.nginx-proxy.nginx"
+
+  acme-companion:
+    image: nginxproxy/acme-companion
+    volumes:
+      - certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - acme:/etc/acme.sh
+    environment:
+      DEFAULT_EMAIL: tech4taxes@gmail.com
+    depends_on:
+      - "nginx-proxy"
+
 
   t1t:
     image: tech4taxes-website
@@ -16,3 +34,12 @@ services:
       - "8000"
     environment:
       VIRTUAL_HOST: tech4taxes.duckdns.org
+      LETSENCRYPT_HOST: tech4taxes.duckdns.org
+      LETSENCRYPT_EMAIL: tech4taxes@gmail.com
+    depends_on:
+      - "acme-companion"
+
+volumes:
+  certs:
+  html:
+  acme:
