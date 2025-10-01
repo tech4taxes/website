@@ -1,5 +1,6 @@
 flask/__pycache__
 flask/pyvenv.cfg
 flask/lib/
+flask/lib64/
 flask/bin/
 

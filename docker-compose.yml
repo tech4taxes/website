@@ -1,0 +1,18 @@
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  t1t:
+    image: tech4taxes-website
+    ulimits:
+      nofile:
+        soft: 1000  # Soft limit for open file descriptors
+        hard: 2000  # Hard limit for open file descriptors
+    ports:
+      - "8000"
+    environment:
+      VIRTUAL_HOST: tech4taxes.duckdns.org
