@@ -4,6 +4,10 @@
   justify-content: center;
 }
 
+img {
+  height: 660;
+}
+
 
 
 body {
@@ -39,6 +43,10 @@ h1 {
 @media screen and (min-width: 1024px) {
   body {
     text-align: center;
+  }
+  /*This is lazy but idk man. Make the image a diff size at diff responsive window...*/
+  img {
+      height: 400;
   }
   p {
     font-size: 1.5vw;
