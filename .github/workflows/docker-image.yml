@@ -52,15 +52,7 @@ jobs:
     needs: [build-and-push-image]
     steps:
       - name: 'Checkout'
-        uses: actions/checkout@v4
-      - name: 'Docker Context'
-        uses: cssnr/docker-context-action@v1
-        with:
-          host: ${{ secrets.DOCKER_HOST }}
-          user: ${{ secrets.DOCKER_USER }}
-          ssh_key: ${{ secrets.DOCKER_SSH_KEY }}
-      - name: 'Docker Pull'
-        run: docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        uses: actions/checkout@v5
       - name: Deploy latest image onto Porygon host
         id: deploy
         uses: cssnr/stack-deploy-action@v1
