@@ -65,4 +65,4 @@ jobs:
           ssh_key: ${{ secrets.DOCKER_SSH_KEY }}
           mode: compose
           detach: true
-          
+          args: --pull always --remove-orphans --force-recreate
