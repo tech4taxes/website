@@ -1,6 +1,6 @@
 .PHONY: flask-dev uwsgi-dev docker-build docker-up docker-down
 
-SHELL=/usr/bin/bash
+SHELL=/usr/bin/env bash
 
 FLASK_DEV_PORT=8000
 
