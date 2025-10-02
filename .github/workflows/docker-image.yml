@@ -47,3 +47,16 @@ jobs:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
+      - name: Deploy latest image onto Porygon host
+        id: deploy
+        uses: cssnr/stack-deploy-action@v1
+        with:
+          name: 'website'
+          file: 'docker-compose.yaml'
+          host: ${{ secrets.DOCKER_HOST }}
+          user: ${{ secrets.DOCKER_USER }}
+          port: 22
+          pass: ${{ secrets.DOCKER_PASS }} # not needed with ssh_key
+          mode: compose
+          detach: true
+          
