@@ -47,6 +47,14 @@ jobs:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
+  deploy:
+    name: 'Deploy'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [build]
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
       - name: Deploy latest image onto Porygon host
         id: deploy
         uses: cssnr/stack-deploy-action@v1
