@@ -48,13 +48,19 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
   deploy:
-    name: 'Deploy'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
     needs: [build-and-push-image]
     steps:
       - name: 'Checkout'
         uses: actions/checkout@v4
+      - name: 'Docker Context'
+        uses: cssnr/docker-context-action@v1
+        with:
+          host: ${{ secrets.DOCKER_HOST }}
+          user: ${{ secrets.DOCKER_USER }}
+          pass: ${{ secrets.DOCKER_PASS }}
+      - name: 'Docker Pull'
+        run: docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       - name: Deploy latest image onto Porygon host
         id: deploy
         uses: cssnr/stack-deploy-action@v1
