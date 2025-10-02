@@ -56,7 +56,7 @@ jobs:
           host: ${{ secrets.DOCKER_HOST }}
           user: ${{ secrets.DOCKER_USER }}
           port: 22
-          pass: ${{ secrets.DOCKER_PASS }} # not needed with ssh_key
+          ssh_key: ${{ secrets.DOCKER_SSH_KEY }}
           mode: compose
           detach: true
           
