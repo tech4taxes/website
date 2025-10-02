@@ -60,7 +60,7 @@ jobs:
         uses: cssnr/stack-deploy-action@v1
         with:
           name: 'website'
-          file: 'docker-compose.yaml'
+          file: 'docker-compose.yml'
           host: ${{ secrets.DOCKER_HOST }}
           user: ${{ secrets.DOCKER_USER }}
           port: 22
