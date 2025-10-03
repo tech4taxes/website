@@ -3,4 +3,5 @@ flask/pyvenv.cfg
 flask/lib/
 flask/lib64/
 flask/bin/
+flask/share/
 
