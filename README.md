@@ -1,4 +1,8 @@
 # website
+
+[![Create and publish a Docker image](https://github.com/tech4taxes/website/actions/workflows/docker-image.yml/badge.svg?branch=main)](https://github.com/tech4taxes/website/actions/workflows/docker-image.yml)
+[![Pylint](https://github.com/tech4taxes/website/actions/workflows/pylint.yml/badge.svg)](https://github.com/tech4taxes/website/actions/workflows/pylint.yml)
+
 code for the tech4taxes website
 
 
