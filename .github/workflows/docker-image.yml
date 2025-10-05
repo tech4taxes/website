@@ -66,3 +66,7 @@ jobs:
           mode: compose
           detach: true
           args: --pull always --remove-orphans --force-recreate
+      - name: 'GHCR.io Container Version Cleanup'
+        uses: dataaxiom/ghcr-cleanup-action@v1
+        with:
+          keep-n-tagged: 5
