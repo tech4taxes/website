@@ -70,3 +70,4 @@ jobs:
         uses: dataaxiom/ghcr-cleanup-action@v1
         with:
           keep-n-tagged: 5
+          delete-untagged: true
