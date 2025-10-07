@@ -47,7 +47,7 @@ def _get_data(link):
         name = " ".join(name)
         cols.append([name, naics, a[1], 100*(float(a[3]) / float(a[1]))])
 
-    with open("data/b_o_data.csv", "w", newline='') as fi:
+    with open("../flask/static/data/b_o_data.csv", "w", newline='') as fi:
         writer = csv.writer(fi)
         writer.writerows(cols)
 
