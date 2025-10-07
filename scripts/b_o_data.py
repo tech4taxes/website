@@ -2,6 +2,7 @@
 Scrape Washington Business & Occupation tax data & wrangle it into a nice shape.
 """
 import requests
+import csv
 from bs4 import BeautifulSoup
 
 URL = (
@@ -37,12 +38,19 @@ def _get_data(link):
             data.append(tuple(cols))
 
     data.sort(key=lambda x: float(x[3]) / float(x[1]))
-    b = {}
+    cols = []
     for a in data:
-        b[a[0].replace('\xa0', '')] = (a[1], 100*(float(a[3]) / float(a[1])))
+        words = a[0].replace('\xa0', '').replace(',', ' ')
+        naics = [s for s in words.split() if s.isdigit()]
+        naics = " ".join(naics)
+        name = [s for s in words.split() if not s.isdigit()]
+        name = " ".join(name)
+        cols.append([name, naics, a[1], 100*(float(a[3]) / float(a[1]))])
 
-    for e, v in b.items():
-        print(f"{e}\n    Gross receipts: {v[0]}\n    % Paid B&O: {v[1]}")
+    with open("data/b_o_data.csv", "w", newline='') as fi:
+        writer = csv.writer(fi)
+        writer.writerows(cols)
+
 
 
 _get_data(URL)
