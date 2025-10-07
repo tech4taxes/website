@@ -1,11 +1,17 @@
 <head>
 	<title>Tech4Taxes</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+	{% if config["VITE_DEV_SERVER"] is not none %}
+		<!-- Include the Vite dev server module -->
+		<script type="module" src="{{ config['VITE_DEV_SERVER'] }}/@vite/client"></script>
+	{% endif %}
+
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 	<link href="https://fonts.cdnfonts.com/css/reglo" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href={{ url_for('static', filename='styles/website.css') }} media="screen" />
 
 </head>

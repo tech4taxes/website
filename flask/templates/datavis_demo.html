@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <head>
 	<title>Tech4Taxes</title>
+
+	{% if config["VITE_DEV_SERVER"] is not none %}
+		<!-- Include the Vite dev server module -->
+		<script type="module" src="{{ config['VITE_DEV_SERVER'] }}/@vite/client"></script>
+	{% endif %}
+
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -9,6 +15,8 @@
 
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script type="module" src="static/assets/datavis_demo.js"></script>
+	<!-- Include the bundled JavaScript at the end of the document -->
+	<script type="module" src="{{ get_module_path('demo') }}"></script>
 </head>
 
 <body>
