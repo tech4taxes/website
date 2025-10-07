@@ -11,6 +11,12 @@ So far, this is using flask & uwsgi. When deploying to the internet, we should a
 
 The Makefile in the root folder has some commands that set up the flask web server (flask-dev & flask-prod) and run them locally.
 
+First, ensure that you have the correct python version installed: 
+```
+python3 --version
+```
+Should return python12 or greater. If not, please [upgrade your python version](https://www.python.org/downloads/) before proceeding.
+
 We use a python virtualenv in the flask/ folder to run the flask app, set up with:
 
 ```
