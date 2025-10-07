@@ -10,6 +10,26 @@ URL = (
     "Results5.aspx?Period=2025Q1&Type=naics&Format=HTML"
 )
 
+NAICS_CAT = {
+        11: "Agriculture, Forestry, Fishing",
+        21: "Mining",
+        22: "Utilities",
+        23: "Construction",
+        31: "Manufacturing",
+        32: "Manufacturing",
+        33: "Manufacturing",
+        42: "Wholesale Trade",
+        44: "Retail Trade",
+        45: "Retail Trade",
+        48: "Transportation",
+        49: "Transportation",
+        51: "Information",
+        52: "Finance, Insurance, Real Estate",
+        53: "Finance, Insurance, Real Estate",
+}
+
+
+
 # _get_data pulls given google doc link from the web and parses the HTML content into
 # a nice dict for use
 def _get_data(link):
@@ -39,18 +59,23 @@ def _get_data(link):
 
     data.sort(key=lambda x: float(x[3]) / float(x[1]))
     cols = []
+    doubles_check = []
     for a in data:
         words = a[0].replace('\xa0', '').replace(',', ' ')
         naics = [s for s in words.split() if s.isdigit()]
         naics = " ".join(naics)
         name = [s for s in words.split() if not s.isdigit()]
         name = " ".join(name)
+        if name in doubles_check:
+            cat = int("".join(naics[0:2]))
+            name = name + f" ({NAICS_CAT[cat]})"
+        else:
+            doubles_check.append(name)
         cols.append([name, naics, a[1], 100*(float(a[3]) / float(a[1]))])
 
     with open("../flask/static/data/b_o_data.csv", "w", newline='') as fi:
         writer = csv.writer(fi)
         writer.writerows(cols)
-
 
 
 _get_data(URL)
