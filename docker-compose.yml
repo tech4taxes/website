@@ -33,8 +33,8 @@ services:
     ports:
       - "8000"
     environment:
-      VIRTUAL_HOST: tech4taxes.duckdns.org
-      LETSENCRYPT_HOST: tech4taxes.duckdns.org
+      VIRTUAL_HOST: tech4taxes.org
+      LETSENCRYPT_HOST: tech4taxes.org
       LETSENCRYPT_EMAIL: tech4taxes@gmail.com
     depends_on:
       - "acme-companion"
