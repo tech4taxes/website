@@ -1,3 +1,14 @@
+/* Resetting browser-specific margins and shit */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box; /* Important for consistent box model */
+}
+
 #headerimage {
   width:100%;
   display: flex;
@@ -15,8 +26,6 @@ body {
   font-size: 0;
   font-variant: unset;
   text-transform: none;
-  margin: 0;
-  padding: 0;
   text-wrap-mode: wrap;
   white-space-collapse: preserve;
   overflow-wrap: break-word;
@@ -63,6 +72,15 @@ body {
 }
 
 /* Ensure the body content starts below the header */
+a {
+  text-decoration: underline;
+  color: #FF5A00;
+}
+
+strong {
+  font-weight: 700;
+}
+
 main {
     padding: 1.4vw;
 }
@@ -77,21 +95,52 @@ p {
 .longp { 
   font-size: 1.8vw;
   text-align: left;
+  line-height: 1.5;
+  margin: 0 0 0;
 }
 
 h1 {
-  font-family: "Reglo";
+  font-family: "Rubik";
   color: rgb(255, 87, 34);
   font-size: 5vw;
-  margin: 0 7% 4%;
+  font-weight: 600;
+}
+
+h1 a {
+  color: #302deb;
 }
 
 h2 {
   font-family: "Reglo";
   color: rgb(255, 87, 34);
   font-size: 3.75vw;
-  margin: 0 0 4%;
   text-align: left;
+  color: #1f2937; 
+  border-bottom: 2px solid #e5e7eb; 
+  padding-bottom: 0.5vw;
+  margin-bottom: 3vw;
+}
+
+h2 a {
+  color: #302deb;
+}
+
+h3 {
+  font-family: "Reglo";
+  color: rgb(255, 87, 34);
+  font-size: 3.2vw;
+  text-align: left;
+  margin-bottom: 1.5vw;
+}
+
+h3 a {
+  color: #302deb;
+}
+
+.subheading {
+  color: #059669; 
+  font-weight: 700; 
+  font-size: 3vw;
 }
 
 footer {
