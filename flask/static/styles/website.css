@@ -113,10 +113,6 @@ footer {
 }
 
 @media screen and (min-width: 1024px) {
-  /*This is lazy but idk man. Make the image a diff size at diff responsive window...*/
-  img {
-      height: 400;
-  }
   p {
     font-size: 2vw;
   }
