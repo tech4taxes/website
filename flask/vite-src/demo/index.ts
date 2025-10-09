@@ -1,9 +1,8 @@
 // This is a javascript library file to be loaded & accessed under route /demo !
 //
-// import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-const d3 = require("https://cdn.jsdelivr.net/npm/d3@7/+esm");
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-const container = document.getElementById('body');
+var container = document.body;
 
 var rawData = `Ohh
 La la la la la
@@ -185,3 +184,4 @@ bars.selectAll('.bar')
 
 // Append the SVG element.
 container.append(svg.node());
+// container is null
