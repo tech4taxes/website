@@ -68,7 +68,7 @@ body {
     margin: 0; 
     line-height: 1; 
     text-transform: uppercase;
-    letter-spacing: 3;
+    letter-spacing: 3px;
 }
 
 /* Ensure the body content starts below the header */

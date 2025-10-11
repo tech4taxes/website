@@ -1,26 +1,10 @@
-<!DOCTYPE html>
-<head>
-	<title>Tech4Taxes</title>
+{% extends "base.html.jinja" %}
 
-	{% if config["VITE_DEV_SERVER"] is not none %}
-		<!-- Include the Vite dev server module -->
-		<script type="module" src="{{ config['VITE_DEV_SERVER'] }}/@vite/client"></script>
-	{% endif %}
+{% block posthead %}
+<script type="module" src="{{ get_module_path('demo') }}"></script>
+{% endblock %}
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-	<link href="https://fonts.cdnfonts.com/css/reglo" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href={{ url_for('static', filename='styles/website.css') }} media="screen" />
-
-	<!-- Include the bundled JavaScript at the end of the document -->
-	<script type="module" src="{{ get_module_path('demo') }}"></script>
-</head>
-
-<body>
-	<h1> A really cool demo data visualization should go here. </h1>
-
+{% block content %}
+<h1> A really cool demo data visualization should go here. </h1>
 <div id="container"></div>
-
-
-</body>
+{% endblock %}

@@ -2,7 +2,7 @@
 //
 import * as d3 from 'd3';
 
-var container = document.body;
+var container = document.getElementById("container");
 
 var rawData = `Ohh
 La la la la la
@@ -147,8 +147,8 @@ const y = d3.scaleLinear()
 
 // Create the SVG container.
 const svg = d3.create("svg")
-    .attr("width", width)
-    .attr("height", height);
+    .attr("viewBox", "0 0 " + width + " " + height)
+    .attr("preserveAspectRatio", "xMidYMid meet");
 
 // Add the x-axis.
 svg.append("g")
@@ -184,4 +184,3 @@ bars.selectAll('.bar')
 
 // Append the SVG element.
 container.append(svg.node());
-// container is null
