@@ -56,7 +56,8 @@ def module_path_processor(name: str) -> str:
     if chunk is None:
         return ""
 
-    return chunk["file"][len("static") :]
+    # return chunk["file"][len("static") :]
+    return chunk["file"]
 
 
 def module_style_processor(name: str) -> Markup:
@@ -75,7 +76,8 @@ def module_style_processor(name: str) -> Markup:
     result = ""
 
     for css in chunk["css"]:
-        dist_path = css[len("static") :]
+        # dist_path = css[len("static") :]
+        dist_path = css
         result += f'<link rel="stylesheet" href="{dist_path}">'
 
     return Markup(result)

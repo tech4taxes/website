@@ -9,7 +9,7 @@ flask-dev:
 	cd flask && source bin/activate && FLASK_ENV=DEV flask --app website run --debug --port $(FLASK_DEV_PORT)
 
 uwsgi-dev:
-	cd flask && source bin/activate && FLASK_ENV=DEV uwsgi --http 127.0.0.1:$(FLASK_DEV_PORT) --master -p 4 -w website:app 
+	cd flask && source bin/activate && FLASK_ENV=DEV uwsgi --http 127.0.0.1:$(FLASK_DEV_PORT) --master -p 4 -w website:app
 
 vite-dev:
 	cd flask && npm run dev

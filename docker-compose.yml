@@ -25,7 +25,7 @@ services:
 
 
   t1t:
-    image: ghcr.io/tech4taxes/website:tech4taxes-website-latest
+    image: tech4taxes-website
     ulimits:
       nofile:
         soft: 1000  # Soft limit for open file descriptors
@@ -36,6 +36,7 @@ services:
       VIRTUAL_HOST: tech4taxes.org
       LETSENCRYPT_HOST: tech4taxes.org
       LETSENCRYPT_EMAIL: tech4taxes@gmail.com
+      FLASK_ENV: PROD
     depends_on:
       - "acme-companion"
 

@@ -8,7 +8,10 @@ WORKDIR /api-flask
 ADD . /api-flask/
 
 RUN apt update
-RUN apt install -y uwsgi libexpat1
+RUN apt install -y uwsgi libexpat1 curl
+
+# Install nvm / node / npm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash && .  "$HOME/.nvm/nvm.sh" && nvm install 22 && npm install && npm run build
 
 # Upgrade pip and install Python dependencies
 RUN pip3 install --upgrade pip && pip install --no-cache-dir -r requirements.txt
