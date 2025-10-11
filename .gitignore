@@ -11,3 +11,4 @@ flask/node_modules/
 package-lock.json
 flask/static/dist
 **/.DS_STORE
+node_modules
