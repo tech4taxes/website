@@ -22,3 +22,6 @@ docker-up:
 
 docker-down:
 	sudo docker compose down
+
+eslint:
+	cd flask && npx eslint vite-src

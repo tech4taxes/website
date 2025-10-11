@@ -1,10 +1,10 @@
-// This is a javascript library file to be loaded & accessed under route /demo !
+// This is a javascript library file to be loaded & accessed under route /demo/d3 !
 //
 import * as d3 from 'd3';
 
-var container = document.getElementById("container");
+const container = document.getElementById("container");
 
-var rawData = `Ohh
+const rawData = `Ohh
 La la la la la
 Ohh
 Yeah
@@ -85,11 +85,11 @@ We're gonna be someday
 Someday, someday
 We're gonna be someday`
 
-var splitData = rawData.split(/\s+/)
+const splitData = rawData.split(/\s+/)
 
-var data = {}
-for (var item in splitData) {
-  var li = splitData[item].toLowerCase()
+const data = {}
+for (const item in splitData) {
+  const li = splitData[item].toLowerCase()
   if (li in data) {
     data[li] += 1
   } else {
@@ -99,30 +99,17 @@ for (var item in splitData) {
 }
 
 
-// Log to console
-console.log(splitData[13])
-console.log(data)
+const words = Object.keys(data)
 
-var words = Object.keys(data)
-
-var freqs = []
-for (var item in data) {
+const freqs = []
+for (const item in data) {
     freqs.push( {word: item, freq: data[item]})
 }
-
-console.log(freqs)
-console.log(freqs[0])
-console.log(freqs[0].word)
-console.log(freqs[0].freq)
 
 // Sort by frequency descending
 freqs.sort((a, b) => b.freq - a.freq);
 
-var nice = freqs.slice(0, 10)
-console.log(nice)
-
-console.log(splitData.length)
-console.log(words.length)
+const nice = freqs.slice(0, 10)
 
 
 // Declare the chart dimensions and margins.
@@ -135,8 +122,8 @@ const marginLeft = 40;
 
 // Declare the x (horizontal position) scale.
 const x = d3.scaleBand()
-    .domain(nice.map(x => {
-  return x.word;
+  .domain(nice.map(x => {
+    return x.word;
 }))
     .range([marginLeft, width - marginRight]);
 
@@ -163,7 +150,7 @@ svg.append("g")
 
 
 // Create an SVG group that we will add the individual bar elements of our chart to
-var bars = svg.append('g')
+const bars = svg.append('g')
 	.attr('id', "bars-container");
 
 // Bind the data to our .bars svg elements
@@ -179,7 +166,7 @@ bars.selectAll('.bar')
 			return y(d.freq); 
 		})
 		.attr('width', x.bandwidth() - 40)
-		.attr('height', function(d){return height-y(d.freq) - 50;});
+		.attr('height', function(d){return height-y(d.freq) - 50;})
 
 
 // Append the SVG element.
