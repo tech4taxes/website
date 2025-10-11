@@ -1,7 +1,7 @@
 {% extends "base.html.jinja" %}
 
 {% block posthead %}
-<script type="module" src="{{ get_module_path('demo_plotly') }}"></script>
+<script type="module" src="{{ get_module_path(request, 'demo_plotly') }}"></script>
 {% endblock %}
 
 {% block content %}

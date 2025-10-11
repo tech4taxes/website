@@ -9,6 +9,7 @@ Deviations from copypasta will likely be to support our weird file paths.
 import functools
 import json
 import os
+import urllib
 
 from typing import Optional
 
@@ -39,7 +40,7 @@ def _get_manifest_chunk(name: str) -> Optional[dict]:
     return next((c for c in manifest.values() if c["name"] == name), None)
 
 
-def module_path_processor(name: str) -> str:
+def module_path_processor(request, name: str) -> str:
     """
     Context processor to get the path of a module as defined in the asset manifest
     If running in development mode, return the file served from the Vite dev server
@@ -54,10 +55,14 @@ def module_path_processor(name: str) -> str:
     if chunk is None:
         return ""
 
-    return chunk["file"]
+    base_path = urllib.parse.urlunsplit(
+        urllib.parse.urlsplit(request.url)[:2] + ("", "", "")
+    )
+
+    return urllib.parse.urljoin(base_path, chunk["file"])
 
 
-def module_style_processor(name: str) -> Markup:
+def module_style_processor(request, name: str) -> Markup:
     """
     Context processor to get stylesheets associated with a module (applies only to production)
     If running in development mode, stylesheets are served dynamically by the Vite dev server
@@ -72,8 +77,13 @@ def module_style_processor(name: str) -> Markup:
 
     result = ""
 
+    base_path = urllib.parse.urlunsplit(
+        urllib.parse.urlsplit(request.url)[:2] + ("", "", "")
+    )
+
     for css in chunk["css"]:
         dist_path = css
-        result += f'<link rel="stylesheet" href="{dist_path}">'
+        url = urllib.parse.urljoin(base_path, dist_path)
+        result += f'<link rel="stylesheet" href="{url}">'
 
     return Markup(result)
