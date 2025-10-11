@@ -20,4 +20,5 @@ jobs:
         pip install -r flask/requirements.txt
     - name: Analysing the code with pylint
       run: |
+        source flask/bin/activate
         pylint $(git ls-files '*.py')
