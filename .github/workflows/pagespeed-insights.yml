@@ -13,7 +13,8 @@ jobs:
     name: Run PageSpeed Insights
     runs-on: ubuntu-latest
     steps:
-      - uses: wicksipedia/pagespeed-insights@main
+      - name: Pagespeed Insights
+        uses: wicksipedia/pagespeed-insights@main
         id: pagespeed-insights
         with:
           url: https://tech4taxes.org
@@ -26,54 +27,50 @@ jobs:
           delayBetweenRetries: 30000
           maximumNumberOfRetries: 4
           key: ${{ secrets.PAGESPEED_INSIGHTS_API_KEY }}
-  badge:
-    if: ${{ github.repository == 'tech4taxes/website' && github.event.workflow_run.conclusion == 'success' }}
-    name: Create example first badge from pagespeed insights results
-    runs-on: ubuntu-latest
-    needs: [pagespeed-insights]
-    steps:
-    - uses: actions/checkout@v5
-      with:
-        ref: main
-    - name: Create destination directory
-      env:
-        BADGE_PATH: badges
-      run: mkdir -p "${BADGE_PATH%/*}"
-    - name: Generate the badge SVG image
-      uses: emibcn/badge-action@v2.0.2
-      id: badge
-      with:
-        label: 'Accessibility'
-        status: ${{ needs.pagespeed-insights.outputs.accessibility }}
-        color: ${{
-          needs.pagespeed-insights.outputs.accessibility > 90 && 'green'              ||
-          needs.pagespeed-insights.outputs.accessibility > 80 && 'yellow,green'       ||
-          needs.pagespeed-insights.outputs.accessibility > 70 && 'yellow'             ||
-          needs.pagespeed-insights.outputs.accessibility > 60 && 'orange,yellow'      ||
-          needs.pagespeed-insights.outputs.accessibility > 50 && 'orange'             ||
-          needs.pagespeed-insights.outputs.accessibility > 40 && 'red,orange'         ||
-          needs.pagespeed-insights.outputs.accessibility > 30 && 'red,red,orange'     ||
-          needs.pagespeed-insights.outputs.accessibility > 20 && 'red,red,red,orange' ||
-          'red' }}
-        path: badges/pagespeed-insights-accessibility.svg
-    - name: Upload badge as artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: pagespeed-insights-accessibility-badge
-        path: badges/pagespeed-insights-accessibility.svg
-        if-no-files-found: error
-    - name: Commit badge
-      continue-on-error: false
-      env:
-        BADGE: badges/pagespeed-insights-accessibility.svg
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add "${BADGE}"
-        git commit -m "Add/Update pagespeed insights accessibility badge"
-    - name: Push badge commit
-      uses: ad-m/github-push-action@master
-      if: ${{ success() }}
-      with:
-        github_token: ${{ secrets.TECH_4_TAXES_ACTION_PAT }}
-        branch: main
+      - name: Checkout main
+        uses: actions/checkout@v5
+        id: checkout main
+        with:
+          ref: main
+      - name: Create destination directory
+        env:
+          BADGE_PATH: badges
+        run: mkdir -p "${BADGE_PATH%/*}"
+      - name: Generate the badge SVG image
+        uses: emibcn/badge-action@v2.0.2
+        id: badge
+        with:
+          label: 'Accessibility'
+          status: ${{ needs.pagespeed-insights.outputs.accessibility }}
+          color: ${{
+            step.pagespeed-insights.outputs.accessibility > 90 && 'green'              ||
+            step.pagespeed-insights.outputs.accessibility > 80 && 'yellow,green'       ||
+            step.pagespeed-insights.outputs.accessibility > 70 && 'yellow'             ||
+            step.pagespeed-insights.outputs.accessibility > 60 && 'orange,yellow'      ||
+            step.pagespeed-insights.outputs.accessibility > 50 && 'orange'             ||
+            step.pagespeed-insights.outputs.accessibility > 40 && 'red,orange'         ||
+            step.pagespeed-insights.outputs.accessibility > 30 && 'red,red,orange'     ||
+            step.pagespeed-insights.outputs.accessibility > 20 && 'red,red,red,orange' ||
+            'red' }}
+          path: badges/pagespeed-insights-accessibility.svg
+      - name: Upload badge as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pagespeed-insights-accessibility-badge
+          path: badges/pagespeed-insights-accessibility.svg
+          if-no-files-found: error
+      - name: Commit badge
+        continue-on-error: false
+        env:
+          BADGE: badges/pagespeed-insights-accessibility.svg
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add "${BADGE}"
+          git commit -m "Add/Update pagespeed insights accessibility badge"
+      - name: Push badge commit
+        uses: ad-m/github-push-action@master
+        if: ${{ success() }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
