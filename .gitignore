@@ -1,7 +1,13 @@
 flask/__pycache__
 flask/pyvenv.cfg
+flask/py/__pycache__
 flask/lib/
 flask/lib64/
 flask/bin/
 flask/share/
+flask/.vite/
+flask/node_modules/
+.vite
+package-lock.json
+flask/static/dist
 **/.DS_STORE
