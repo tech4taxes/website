@@ -1,0 +1,12 @@
+{% extends "base.html.jinja" %}
+
+{% block posthead %}
+<script type="module" src="{{ get_module_path('demo_plotly') }}"></script>
+{% endblock %}
+
+{% block content %}
+<h1> A simple and beautiful visualization should go here. </h1>
+<div id="container1"></div>
+<div id="container2"></div>
+<div id="container3"></div>
+{% endblock %}

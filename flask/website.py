@@ -33,9 +33,13 @@ def create_app():
         return render_template("legislative_agenda.html")
 
 
-    @app.route("/demo")
-    def datavis_demo():
-        return render_template("datavis_demo.html")
+    @app.route("/demo/d3")
+    def demo_d3():
+        return render_template("demo_d3.html")
+
+    @app.route("/demo/plotly")
+    def demo_plotly():
+        return render_template("demo_plotly.html")
 
     return app
 
