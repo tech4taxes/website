@@ -1,4 +1,4 @@
-name: Pagespeed Insights test + results
+name: Pagespeed Insights test
 
 on:
   workflow_run:
@@ -35,7 +35,7 @@ jobs:
     - name: Create destination directory
       env:
         BADGE_PATH: badges
-        run: mkdir -p "${BADGE_PATH%/*}"
+      run: mkdir -p "${BADGE_PATH%/*}"
     - name: Generate the badge SVG image
       uses: emibcn/badge-action@v2.0.2
       id: badge
@@ -63,11 +63,11 @@ jobs:
       continue-on-error: false
       env:
         BADGE: badges/pagespeed-insights-accessibility.svg
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add "${BADGE}"
-          git commit -m "Add/Update pagespeed insights accessibility badge"
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add "${BADGE}"
+        git commit -m "Add/Update pagespeed insights accessibility badge"
     - name: Push badge commit
       uses: ad-m/github-push-action@master
       if: ${{ success() }}
