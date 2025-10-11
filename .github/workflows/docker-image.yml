@@ -86,7 +86,7 @@ jobs:
               best_practices
               performance
               SEO
-            strategy: mobile,desktop
+            strategy: mobile
             delayBetweenRetries: 30000
             maximumNumberOfRetries: 4
             key: ${{ secrets.PAGESPEED_INSIGHTS_API_KEY }}
