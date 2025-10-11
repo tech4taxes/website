@@ -38,3 +38,6 @@ def create_app():
         return render_template("datavis_demo.html")
 
     return app
+
+
+app = create_app()

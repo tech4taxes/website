@@ -1,6 +1,6 @@
 // This is a javascript library file to be loaded & accessed under route /demo !
 //
-import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+import * as d3 from 'd3';
 
 var container = document.body;
 
