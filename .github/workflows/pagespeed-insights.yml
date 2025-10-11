@@ -43,14 +43,14 @@ jobs:
           label: 'Accessibility'
           status: ${{ needs.pagespeed-insights.outputs.accessibility }}
           color: ${{
-            step.pagespeed-insights.outputs.accessibility > 90 && 'green'              ||
-            step.pagespeed-insights.outputs.accessibility > 80 && 'yellow,green'       ||
-            step.pagespeed-insights.outputs.accessibility > 70 && 'yellow'             ||
-            step.pagespeed-insights.outputs.accessibility > 60 && 'orange,yellow'      ||
-            step.pagespeed-insights.outputs.accessibility > 50 && 'orange'             ||
-            step.pagespeed-insights.outputs.accessibility > 40 && 'red,orange'         ||
-            step.pagespeed-insights.outputs.accessibility > 30 && 'red,red,orange'     ||
-            step.pagespeed-insights.outputs.accessibility > 20 && 'red,red,red,orange' ||
+            steps.pagespeed-insights.outputs.accessibility > 90 && 'green'              ||
+            steps.pagespeed-insights.outputs.accessibility > 80 && 'yellow,green'       ||
+            steps.pagespeed-insights.outputs.accessibility > 70 && 'yellow'             ||
+            steps.pagespeed-insights.outputs.accessibility > 60 && 'orange,yellow'      ||
+            steps.pagespeed-insights.outputs.accessibility > 50 && 'orange'             ||
+            steps.pagespeed-insights.outputs.accessibility > 40 && 'red,orange'         ||
+            steps.pagespeed-insights.outputs.accessibility > 30 && 'red,red,orange'     ||
+            steps.pagespeed-insights.outputs.accessibility > 20 && 'red,red,red,orange' ||
             'red' }}
           path: badges/pagespeed-insights-accessibility.svg
       - name: Upload badge as artifact
