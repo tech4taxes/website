@@ -12,9 +12,9 @@ import os
 
 from typing import Optional
 
-from flask import current_app
-
 from markupsafe import Markup
+
+from flask import current_app
 
 
 @functools.lru_cache(maxsize=1)
@@ -23,7 +23,6 @@ def _get_asset_manifest() -> dict[str, dict]:
     Get the asset manifest (in website/.vite/manifest.json)
     """
     with open(
-        # TODO: add ../ somewhere in here???
         os.path.join(current_app.root_path, ".vite", "manifest.json"),
         "r",
         encoding="utf-8",
@@ -48,7 +47,6 @@ def module_path_processor(name: str) -> str:
     vite_dev_server = current_app.config["VITE_DEV_SERVER"]
 
     if vite_dev_server is not None:
-        # TODO - check that this path is correct
         return f"{vite_dev_server}/vite-src/{name}/index.ts"
 
     chunk = _get_manifest_chunk(name)
@@ -56,7 +54,6 @@ def module_path_processor(name: str) -> str:
     if chunk is None:
         return ""
 
-    # return chunk["file"][len("static") :]
     return chunk["file"]
 
 
@@ -76,7 +73,6 @@ def module_style_processor(name: str) -> Markup:
     result = ""
 
     for css in chunk["css"]:
-        # dist_path = css[len("static") :]
         dist_path = css
         result += f'<link rel="stylesheet" href="{dist_path}">'
 
