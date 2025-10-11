@@ -1,16 +1,7 @@
-<head>
-	<title>Legislative Agenda</title>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-	<link href="https://fonts.cdnfonts.com/css/reglo" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href={{ url_for('static', filename='styles/website.css') }} media="screen" />
-</head>
-<body>
-<header class="page-header"><img src={{ url_for('static', filename="assets/images/lb_orange.png") }} alt="Load Balancer Icon" class="logo-icon"><div class="logo-bar"><h1 class="logo-text">TECH 4 TAXES</h1></div></header>
-<main style="margin: 0; 3vw;">
+{% extends "base.html.jinja" %}
+
+{% block content %}
+<main>
 <h1 style="border-bottom: 1px solid #e5e7eb;">
 2025-2026 Legislative Agenda</h1>
 <p class="longp" style="font-size: 2.5vw;">
@@ -81,15 +72,4 @@ Interested in helping us accomplish these goals? Fill out our <a href="https://f
 
 </p>
 </main>
-</body>
-<footer>
-Connect with us!
-
-<div style="display: flex; flex-wrap: wrap; align-items: center; font-size: 14px;">
-    <a class="foota" href="https://www.tiktok.com/@tech4taxes7" target="_blank" rel="noopener noreferrer">TikTok</a>
-    <span style="margin-right: 16px;">|</span>
-    <a class="foota" href="https://www.instagram.com/tech4taxes" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <span style="margin-right: 16px;">|</span>
-    <a class="foota" href="https://www.linkedin.com/company/107836109/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-</div>
-</footer>
+{% endblock %}
