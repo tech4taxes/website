@@ -88,3 +88,7 @@ If you need to test against the prod docker-setup, you can use the make target `
 ## Extra Notes
 Right now, the site is accessible at:
 - http://tech4taxes.org
+
+
+Kelly Just Added a crontab entry for root on porygon to prune docker system nightly at 3am. A practical use of cron???
+`0 3 * * * docker system prune --all --force`
