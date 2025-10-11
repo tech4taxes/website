@@ -12,6 +12,7 @@ env:
 
 jobs:
   build-and-push-image:
+    if: github.repository == 'tech4taxes/website'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -48,6 +49,7 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
   deploy:
+    if: github.repository == 'tech4taxes/website'
     runs-on: ubuntu-latest
     needs: [build-and-push-image]
     steps:
@@ -71,23 +73,22 @@ jobs:
         with:
           keep-n-tagged: 5
           delete-untagged: true
-
   pagespeed-insights:
-      name: Run PageSpeed Insights
-      runs-on: ubuntu-latest
-      needs: [deploy]
-      steps:
-        - uses: wicksipedia/pagespeed-insights@main
-          id: pagespeed-insights
-          with:
-            url: https://tech4taxes.org
-            categories: |
-              accessibility
-              best_practices
-              performance
-              SEO
-            strategy: mobile
-            delayBetweenRetries: 30000
-            maximumNumberOfRetries: 4
-            key: ${{ secrets.PAGESPEED_INSIGHTS_API_KEY }}
-
+    if: github.repository == 'tech4taxes/website'
+    name: Run PageSpeed Insights
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    steps:
+      - uses: wicksipedia/pagespeed-insights@main
+        id: pagespeed-insights
+        with:
+          url: https://tech4taxes.org
+          categories: |
+            accessibility
+            best_practices
+            performance
+            SEO
+          strategy: mobile
+          delayBetweenRetries: 30000
+          maximumNumberOfRetries: 4
+          key: ${{ secrets.PAGESPEED_INSIGHTS_API_KEY }}
