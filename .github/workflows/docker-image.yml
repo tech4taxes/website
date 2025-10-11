@@ -71,3 +71,23 @@ jobs:
         with:
           keep-n-tagged: 5
           delete-untagged: true
+
+  pagespeed-insights:
+      name: Run PageSpeed Insights
+      runs-on: ubuntu-latest
+      needs: [deploy]
+      steps:
+        - uses: wicksipedia/pagespeed-insights@main
+          id: pagespeed-insights
+          with:
+            url: https://tech4taxes.org
+            categories: |
+              accessibility
+              best_practices
+              performance
+              SEO
+            strategy: mobile,desktop
+            delayBetweenRetries: 30000
+            maximumNumberOfRetries: 4
+            key: ${{ secrets.PAGESPEED_INSIGHTS_API_KEY }}
+
