@@ -2,7 +2,7 @@
 
 [![Create and publish a Docker image](https://github.com/tech4taxes/website/actions/workflows/docker-image.yml/badge.svg?branch=main)](https://github.com/tech4taxes/website/actions/workflows/docker-image.yml)
 [![Pylint](https://github.com/tech4taxes/website/actions/workflows/pylint.yml/badge.svg)](https://github.com/tech4taxes/website/actions/workflows/pylint.yml)
-[![PageSpeed Insights Accessibility](https://github.com/tech4taxes/website/blob/main/badges/pagespeed-insights-accessibility.svg)](https://github.com/tech4taxes/website/actions/workflows/pagespeed-insights.yml)
+[![PageSpeed Insights Accessibility](https://github.com/tech4taxes/website/raw/refs/heads/main/badges/pagespeed-insights-accessibility.svg)](https://github.com/tech4taxes/website/actions/workflows/pagespeed-insights.yml)
 
 code for the tech4taxes website
 
