@@ -20,7 +20,12 @@
 </head>
 
 <body>
-<header class="page-header"><img src={{ url_for('static', filename="assets/images/lb_orange.png") }} alt="Load Balancer Icon" class="logo-icon"><div class="logo-bar"><h1 class="logo-text">TECH 4 TAXES</h1></div></header>
+<header class="page-header">
+<nav class="header-nav">
+  <a href="{{ url_for('hello_world') }}" class="nav-link">Home</a>
+  <a href="{{ url_for('leg_agenda') }}" class="nav-link">Legislative Agenda</a>
+</nav>
+<img src={{ url_for('static', filename="assets/images/lb_orange.png") }} alt="Load Balancer Icon" class="logo-icon"><div class="logo-bar"><h1 class="logo-text">TECH 4 TAXES</h1></div></header>
 
 {% block content %}{% endblock %}
 
