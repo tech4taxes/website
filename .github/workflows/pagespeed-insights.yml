@@ -41,7 +41,7 @@ jobs:
         id: badge
         with:
           label: 'Accessibility'
-          status: ${{ needs.pagespeed-insights.outputs.accessibility }}
+          status: ${{ steps.pagespeed-insights.outputs.accessibility }}
           color: ${{
             steps.pagespeed-insights.outputs.accessibility > 90 && 'green'              ||
             steps.pagespeed-insights.outputs.accessibility > 80 && 'yellow,green'       ||
