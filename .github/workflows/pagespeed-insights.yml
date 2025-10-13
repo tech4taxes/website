@@ -79,5 +79,5 @@ jobs:
         uses: ad-m/github-push-action@master
         if: ${{ success() && steps.repo-change-detect.outputs.changes_detected == '1' }}
         with:
-          github_token: ${{ secrets.TECH_4_TAXES_ACTION_PAT }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
