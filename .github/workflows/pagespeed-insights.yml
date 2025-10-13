@@ -77,7 +77,7 @@ jobs:
           git commit -m "Add/Update pagespeed insights accessibility badge"
       - name: Push badge commit
         uses: ad-m/github-push-action@master
-        if: ${{ success() && steps.repo-change-detect.outputs.changes_detected == "1" }}
+        if: ${{ success() && steps.repo-change-detect.outputs.changes_detected == '1' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
