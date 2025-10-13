@@ -59,7 +59,14 @@ jobs:
           name: pagespeed-insights-accessibility-badge
           path: badges/pagespeed-insights-accessibility.svg
           if-no-files-found: error
+      - name: Check if any changes to repo state
+        id: repo-change-detect
+        run: |
+          git diff-index --quiet HEAD -- && test -z "$(git ls-files --others --exclude-standard)"
+          CHANGES_DETECTED=$?
+          echo "changes_detected=${CHANGES_DETECTED}" >> "$GITHUB_OUTPUT"
       - name: Commit badge
+        if: ${{ steps.repo-change-detect.outputs.changes_detected == "1" }}
         continue-on-error: false
         env:
           BADGE: badges/pagespeed-insights-accessibility.svg
@@ -70,7 +77,7 @@ jobs:
           git commit -m "Add/Update pagespeed insights accessibility badge"
       - name: Push badge commit
         uses: ad-m/github-push-action@master
-        if: ${{ success() }}
+        if: ${{ success() && steps.repo-change-detect.outputs.changes_detected == "1" }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
