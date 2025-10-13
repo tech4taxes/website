@@ -1,6 +1,7 @@
 // This is a javascript library file to be loaded & accessed under route /demo/plotly !
 //
 import '../init.js';
+
 import * as d3 from 'd3';
 import * as Plotly from 'plotly.js/dist/plotly';
 
