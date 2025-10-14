@@ -1,10 +1,8 @@
 // This is a javascript library file to be loaded & accessed under route /demo/plotly !
 //
-import '../init.js';
+import "../init.js";
 
-import * as d3 from 'd3';
-import * as Plotly from 'plotly.js/dist/plotly';
-
+import * as Plotly from "plotly.js/dist/plotly";
 
 const rawData = `Ohh
 La la la la la
@@ -85,82 +83,87 @@ We're gonna be someday
 Someday, someday
 We're gonna be someday
 Someday, someday
-We're gonna be someday`
+We're gonna be someday`;
 
-const splitData = rawData.split(/\s+/)
+const splitData = rawData.split(/\s+/);
 
-const data = {}
+const data = {};
 for (const item in splitData) {
-  const li = splitData[item].toLowerCase()
+  const li = splitData[item].toLowerCase();
   if (li in data) {
-    data[li] += 1
+    data[li] += 1;
   } else {
-      data[li] = 0
+    data[li] = 0;
   }
-  
 }
 
-
-const words = Object.keys(data)
-
-const freqs = []
+const freqs = [];
 for (const item in data) {
-    freqs.push( {word: item, freq: data[item]})
+  freqs.push({ word: item, freq: data[item] });
 }
 
 // Sort by frequency descending
 freqs.sort((a, b) => b.freq - a.freq);
 
-const nice = freqs.slice(0, 10)
+const nice = freqs.slice(0, 10);
 
 // Do plotly magic
 
 const woohoo: Plotly.BarData[] = [
   {
-    x: ['giraffes', 'orangutans', 'monkeys'],
+    x: ["giraffes", "orangutans", "monkeys"],
     y: [20, 14, 23],
-    type: 'bar'
+    type: "bar",
   },
 ];
 
 const container1 = document.getElementById("container1");
 Plotly.newPlot(container1, woohoo, {
-  title: {text: "Cool Animal Numbers"},
+  title: { text: "Cool Animal Numbers" },
 });
 
 const container2 = document.getElementById("container2");
-Plotly.newPlot(container2, [{
-  x: [1, 2, 3, 4, 5],
-  y: [1, 2, 4, 8, 16] }],
+Plotly.newPlot(
+  container2,
+  [
+    {
+      x: [1, 2, 3, 4, 5],
+      y: [1, 2, 4, 8, 16],
+    },
+  ],
   {
-  title: {text: "Squared Numbers"},
-  margin: { t: 0 },
-});
-
+    title: { text: "Squared Numbers" },
+    margin: { t: 0 },
+  },
+);
 
 const D3Colors = [
-  '#1f77b4',
-  '#ff7f0e',
-  '#2ca02c',
-  '#d62728',
-  '#9467bd',
-  '#8c564b',
-  '#e377c2',
-  '#7f7f7f',
-  '#bcbd22',
-  '#17becf'
+  "#1f77b4",
+  "#ff7f0e",
+  "#2ca02c",
+  "#d62728",
+  "#9467bd",
+  "#8c564b",
+  "#e377c2",
+  "#7f7f7f",
+  "#bcbd22",
+  "#17becf",
 ];
 
 const container3 = document.getElementById("container3");
-Plotly.newPlot(container3, [{
-  x: nice.map(d => d.word),
-  y: nice.map(d => d.freq),
-  marker: { color:D3Colors },
-  type: 'bar',
-}],
-{
-  title: {text: "We're gonna be someday"},
-  xaxis: {title: {text: "Words"}, type: "category"},
-  yaxis: {title: {text: "Frequency"}},
-});
-
+Plotly.newPlot(
+  container3,
+  [
+    {
+      x: nice.map((d) => d.word),
+      y: nice.map((d) => d.freq),
+      marker: { color: D3Colors },
+      type: "bar",
+    },
+  ],
+  {
+    title: { text: "We're gonna be someday" },
+    xaxis: { title: { text: "Words" }, type: "category" },
+    yaxis: { title: { text: "Frequency" } },
+  },
+);
