@@ -55,6 +55,7 @@ body {
     margin: 0 auto; 
     position: relative;
     bottom: -4vw;
+    left: -12vw;
     width: 20%;
 }
 
@@ -171,5 +172,55 @@ footer {
   
   h1 {
     font-size: 4vw;
+  }
+}
+
+/* Nav bar, everything below is copied from Gemini (sorry, kelly) (sue me) */
+.page-header {
+  /* Enables flexible layout to position nav, logo, and title bar */
+  display: flex;
+  align-items: flex-start; /* Aligns all content to the top edge */
+  /* Allows elements to wrap on smaller screens */
+  flex-wrap: wrap;
+}
+
+/* Navigation links positioned on the far left */
+.header-nav {
+  display: flex;
+  flex-direction: row; /* Stacks the links horizontally */
+  align-items: flex-start;
+  padding-left: 2vw; /* Space from the left edge of the screen */
+  font-family: 'Work Sans', sans-serif;
+  gap: 2vw;
+  font-size: 1.8vw;
+  font-weight: 500;
+}
+
+.header-nav a {
+  text-decoration: none;
+  color: #333; /* Dark gray for visibility */
+  padding: 4px 0;
+  transition: color 0.2s ease-in-out;
+}
+
+.header-nav a:hover {
+  color: #FF6700; /* Orange hover effect */
+}
+
+/* Responsive adjustments for mobile/small screens */
+@media (max-width: 600px) {
+  .page-header {
+    align-items: center; /* Center everything */
+  }
+  .header-nav {
+    padding-left: 0; /* Remove left padding when centered */
+    flex-direction: row; /* Display links horizontally on mobile */
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 0.5vw;
+    order: -1; /* Puts navigation at the very top of the stack */
+  }
+  .header-nav a {
+    padding: 0 0.5vw;
   }
 }
