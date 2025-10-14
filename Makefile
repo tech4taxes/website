@@ -8,8 +8,14 @@ VITE_DEV_PORT=5173
 flask-dev:
 	cd flask && source bin/activate && FLASK_ENV=DEV flask --app website run --debug --port $(FLASK_DEV_PORT)
 
+flask-prod:
+	cd flask && source bin/activate && FLASK_ENV=PROD flask --app website run --debug --port $(FLASK_DEV_PORT)
+
 uwsgi-dev:
 	cd flask && source bin/activate && FLASK_ENV=DEV uwsgi --http 127.0.0.1:$(FLASK_DEV_PORT) --master -p 4 -w website:app
+
+uwsgi-prod:
+	cd flask && source bin/activate && FLASK_ENV=PROD uwsgi --http 127.0.0.1:$(FLASK_DEV_PORT) --master -p 4 -w website:app
 
 vite-dev:
 	cd flask && npm run dev
@@ -24,4 +30,4 @@ docker-down:
 	sudo docker compose down
 
 eslint:
-	cd flask && npx eslint vite-src
+	cd flask && npm run lint

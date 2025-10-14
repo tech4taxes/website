@@ -83,7 +83,7 @@ make flask-dev
 make vite-dev
 ```
 
-If you need to test against the prod setup (particularly against bundled javascript) - you can modify the command that `make flask-dev` runs and pass `FLASK_ENV=PROD` via the environment - this will make it serve javascript from an `npm run build` output rather than the vite devserver. For this case, you only need to run the flask server - no separate process for vite.
+If you need to test against the prod setup (particularly against bundled javascript) - you can use `make flask-prod` which passes `FLASK_ENV=PROD`- this will make it serve javascript from an `npm run build` output rather than the vite devserver. For this case, you only need to run the flask server - no separate process for vite.
 
 If you need to test against the prod docker-setup, you can use the make target `make docker-build` to build the tech4taxes/website docker image, and then modify the image target for the website in `docker-compose.yml` to point to your local build of the image rather than the GHCR image to pull from CI. To actually start up the docker compose, run `docker compose up -d`. (And similarly shut it down with `docker compose down`.)
 
