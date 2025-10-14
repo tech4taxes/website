@@ -12,7 +12,7 @@ $orange: rgb(255, 87, 34);
 }
 
 #headerimage {
-  width:100%;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -35,50 +35,50 @@ body {
 
 /* Full Header Container */
 .page-header {
-    width: 100%; 
-    background-color: white; 
-    padding-top: 1.4vw; 
-    text-align: center; 
+  width: 100%;
+  background-color: white;
+  padding-top: 1.4vw;
+  text-align: center;
 }
 
 /* Orange Bar Container: Full Width */
 .logo-bar {
-    background-color: $orange;
-    width: 100%;
-    padding: 4vw 0; /* Vertical padding */
+  background-color: $orange;
+  width: 100%;
+  padding: 4vw 0; /* Vertical padding */
 }
 
 /* Image Styling */
 .logo-icon {
-    /* Adjust size as needed */
-    display: block; 
-    margin: 0 auto; 
-    position: relative;
-    bottom: -4vw;
-    left: -12vw;
-    width: 20%;
+  /* Adjust size as needed */
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  bottom: -4vw;
+  left: -12vw;
+  width: 20%;
 }
 
 /* Heading Text Styling: Applying Rubik Bold */
 .logo-text {
-    /* Apply the Rubik font family */
-    font-family: 'Rubik', sans-serif; 
-    
-    /* Set the specific Bold weight */
-    font-weight: 700; 
-    
-    color: white;
-    font-size: 4.2vw;
-    margin: 0; 
-    line-height: 1; 
-    text-transform: uppercase;
-    letter-spacing: 3px;
+  /* Apply the Rubik font family */
+  font-family: "Rubik", sans-serif;
+
+  /* Set the specific Bold weight */
+  font-weight: 700;
+
+  color: white;
+  font-size: 4.2vw;
+  margin: 0;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 3px;
 }
 
 /* Ensure the body content starts below the header */
 a {
   text-decoration: underline;
-  color: #FF5A00;
+  color: #ff5a00;
 }
 
 strong {
@@ -86,7 +86,7 @@ strong {
 }
 
 main {
-    padding: 1.4vw;
+  padding: 1.4vw;
 }
 
 p {
@@ -96,7 +96,7 @@ p {
   margin: 0 7% 0;
 }
 
-.longp { 
+.longp {
   font-size: 1.8vw;
   text-align: left;
   line-height: 1.5;
@@ -119,8 +119,8 @@ h2 {
   color: $orange;
   font-size: 3.75vw;
   text-align: left;
-  color: #1f2937; 
-  border-bottom: 2px solid #e5e7eb; 
+  color: #1f2937;
+  border-bottom: 2px solid #e5e7eb;
   padding-bottom: 0.5vw;
   margin-bottom: 3vw;
 }
@@ -142,26 +142,26 @@ h3 a {
 }
 
 .subheading {
-  color: #059669; 
-  font-weight: 700; 
+  color: #059669;
+  font-weight: 700;
   font-size: 3vw;
 }
 
 footer {
-  background-color: $orange; 
-  color: white; 
-  width: 100%; 
+  background-color: $orange;
+  color: white;
+  width: 100%;
   font-size: 2vw;
-  padding: 24px 16px; 
+  padding: 24px 16px;
   line-height: 1;
   text-align: left;
-  margin-left: 0; 
-  margin-right: 0; 
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .foota {
   color: white;
-  text-decoration: underline; 
+  text-decoration: underline;
   margin-right: 16px;
 }
 
@@ -169,7 +169,7 @@ footer {
   p {
     font-size: 2vw;
   }
-  
+
   h1 {
     font-size: 4vw;
   }
@@ -190,7 +190,7 @@ footer {
   flex-direction: row; /* Stacks the links horizontally */
   align-items: flex-start;
   padding-left: 2vw; /* Space from the left edge of the screen */
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
   gap: 2vw;
   font-size: 1.8vw;
   font-weight: 500;
@@ -204,7 +204,7 @@ footer {
 }
 
 .header-nav a:hover {
-  color: #FF6700; /* Orange hover effect */
+  color: #ff6700; /* Orange hover effect */
 }
 
 /* Responsive adjustments for mobile/small screens */

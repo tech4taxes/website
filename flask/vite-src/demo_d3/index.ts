@@ -1,6 +1,6 @@
 // This is a javascript library file to be loaded & accessed under route /demo/d3 !
 //
-import * as d3 from 'd3';
+import * as d3 from "d3";
 
 const container = document.getElementById("container");
 
@@ -83,34 +83,29 @@ We're gonna be someday
 Someday, someday
 We're gonna be someday
 Someday, someday
-We're gonna be someday`
+We're gonna be someday`;
 
-const splitData = rawData.split(/\s+/)
+const splitData = rawData.split(/\s+/);
 
-const data = {}
+const data = {};
 for (const item in splitData) {
-  const li = splitData[item].toLowerCase()
+  const li = splitData[item].toLowerCase();
   if (li in data) {
-    data[li] += 1
+    data[li] += 1;
   } else {
-      data[li] = 0
+    data[li] = 0;
   }
-  
 }
 
-
-const words = Object.keys(data)
-
-const freqs = []
+const freqs = [];
 for (const item in data) {
-    freqs.push( {word: item, freq: data[item]})
+  freqs.push({ word: item, freq: data[item] });
 }
 
 // Sort by frequency descending
 freqs.sort((a, b) => b.freq - a.freq);
 
-const nice = freqs.slice(0, 10)
-
+const nice = freqs.slice(0, 10);
 
 // Declare the chart dimensions and margins.
 const width = 1024;
@@ -121,53 +116,61 @@ const marginBottom = 30;
 const marginLeft = 40;
 
 // Declare the x (horizontal position) scale.
-const x = d3.scaleBand()
-  .domain(nice.map(x => {
-    return x.word;
-}))
-    .range([marginLeft, width - marginRight]);
+const x = d3
+  .scaleBand()
+  .domain(
+    nice.map((x) => {
+      return x.word;
+    }),
+  )
+  .range([marginLeft, width - marginRight]);
 
 // Declare the y (vertical position) scale.
-const y = d3.scaleLinear()
-    .domain([0, nice[0].freq + 5])
-    .range([height - marginBottom, marginTop]);
+const y = d3
+  .scaleLinear()
+  .domain([0, nice[0].freq + 5])
+  .range([height - marginBottom, marginTop]);
 
 // Create the SVG container.
-const svg = d3.create("svg")
-    .attr("viewBox", "0 0 " + width + " " + height)
-    .attr("preserveAspectRatio", "xMidYMid meet");
+const svg = d3
+  .create("svg")
+  .attr("viewBox", "0 0 " + width + " " + height)
+  .attr("preserveAspectRatio", "xMidYMid meet");
 
 // Add the x-axis.
-svg.append("g")
-    .attr("transform", `translate(0,${height - marginBottom})`)
-    .attr("font-size", `2px`)
-    .call(d3.axisBottom(x));
+svg
+  .append("g")
+  .attr("transform", `translate(0,${height - marginBottom})`)
+  .attr("font-size", `2px`)
+  .call(d3.axisBottom(x));
 
 // Add the y-axis.
-svg.append("g")
-    .attr("transform", `translate(${marginLeft},0)`)
-    .call(d3.axisLeft(y));
-
+svg
+  .append("g")
+  .attr("transform", `translate(${marginLeft},0)`)
+  .call(d3.axisLeft(y));
 
 // Create an SVG group that we will add the individual bar elements of our chart to
-const bars = svg.append('g')
-	.attr('id', "bars-container");
+const bars = svg.append("g").attr("id", "bars-container");
 
 // Bind the data to our .bars svg elements
 // Create a rectangle for each data point and set position and dimensions using scales
-bars.selectAll('.bar')
-	.data(nice)
-	.enter().append("rect")
-		.attr('class', "bar")
-		.attr('x', function(d){
-			return x(d.word);
-		})
-		.attr('y', function(d){
-			return y(d.freq); 
-		})
-		.attr('width', x.bandwidth() - 40)
-		.attr('height', function(d){return height-y(d.freq) - 50;})
-
+bars
+  .selectAll(".bar")
+  .data(nice)
+  .enter()
+  .append("rect")
+  .attr("class", "bar")
+  .attr("x", function (d) {
+    return x(d.word);
+  })
+  .attr("y", function (d) {
+    return y(d.freq);
+  })
+  .attr("width", x.bandwidth() - 40)
+  .attr("height", function (d) {
+    return height - y(d.freq) - 50;
+  });
 
 // Append the SVG element.
 container.append(svg.node());
