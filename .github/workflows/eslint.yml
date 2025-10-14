@@ -1,0 +1,20 @@
+name: Run TS Lint & NPM Build
+
+# Configures this workflow to run every time a change is pushed to the branch called `release`.
+on: [push]
+
+jobs:
+  lint:
+    if: github.repository == 'tech4taxes/website'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+      - name: Install node & dependencies
+        run: |
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+          .  "$HOME/.nvm/nvm.sh"
+          nvm install 22
+          npm install
+          npm run lint
+          npm run build
