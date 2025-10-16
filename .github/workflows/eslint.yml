@@ -1,11 +1,9 @@
 name: Run TS Lint & NPM Build
 
-# Configures this workflow to run every time a change is pushed to the branch called `release`.
-on: [push]
+on: [push, pull_request]
 
 jobs:
   lint:
-    if: github.repository == 'tech4taxes/website'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

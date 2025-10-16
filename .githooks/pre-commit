@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -e
+
+source flask/bin/activate
+pylint $(git ls-files '*.py')
+
+cd flask
+npm run lint
+npm run build
