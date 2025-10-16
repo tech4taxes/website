@@ -23,22 +23,9 @@ const D3Colors = [
 dfd.readCSV("../../static/data/b_o_data.csv") //assumes file is in CWD
   .then(df => {
 
-    console.log(df.columns)
     df.sortValues("PERCENTAGE_PAID", {inplace:true})
-    let head = df.head()
-    let tail = df.tail()
-    df.head().print()
-    df.ctypes.print()
-    const blah = df.head()
-    head.print()
-    tail.print()
-    let headnames = head.Name.values
-    let tailnames = tail.Name.values
-    console.log(headnames)
-    console.log(tailnames)
-    console.log(headnames + tailnames)
-    console.log(head.PERCENTAGE_PAID.values)
-    console.log(tail.PERCENTAGE_PAID.values)
+    const head = df.head()
+    const tail = df.tail()
 
     const woohoo: Plotly.BarData[] = [
       {
@@ -59,10 +46,6 @@ dfd.readCSV("../../static/data/b_o_data.csv") //assumes file is in CWD
 })
 
 
-
-// Do plotly magic
-
-
 const container2 = document.getElementById("container2");
 Plotly.newPlot(container2, [{
   x: [1, 2, 3, 4, 5],
@@ -71,8 +54,3 @@ Plotly.newPlot(container2, [{
   title: {text: "Squared Numbers"},
   margin: { t: 0 },
 });
-
-
-
-
-const container3 = document.getElementById("container3");
