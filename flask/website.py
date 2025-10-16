@@ -41,6 +41,10 @@ def create_app():
     def demo_plotly():
         return render_template("demo_plotly.html")
 
+    @app.route("/demo/bno")
+    def demo_bno():
+        return render_template("demo_bno.html")
+
     return app
 
 
