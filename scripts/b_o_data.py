@@ -4,6 +4,8 @@ Scrape Washington Business & Occupation tax data & wrangle it into a nice shape.
 import requests
 import csv
 from bs4 import BeautifulSoup
+import pandas as pd
+import re
 
 URL = (
     "https://apps.dor.wa.gov/ResearchStats/Content/QuarterlyBusinessReview/"
@@ -28,8 +30,6 @@ NAICS_CAT = {
         53: "Finance, Insurance, Real Estate",
 }
 
-
-
 # _get_data pulls given google doc link from the web and parses the HTML content into
 # a nice dict for use
 def _get_data(link):
@@ -37,7 +37,8 @@ def _get_data(link):
     document = requests.get(link, timeout=10)
     html_content = BeautifulSoup(document.text, features="html.parser")
     tables = html_content.find_all("table")
-    data = []
+    columns = ["IndustryNaics", "GrossRevenue", "Taxable", "BNOTax"]
+    rows = []
 
     # Iterate through the table and create a dictionary of the form dict[(x,y)] = character
     for table in tables:
@@ -55,27 +56,37 @@ def _get_data(link):
             if isinstance(cols[1], str):
                 continue
 
-            data.append(tuple(cols))
+            r = dict(zip(columns, cols))
+            rows.append(r)
 
-    data.sort(key=lambda x: float(x[3]) / float(x[1]))
-    cols = []
-    doubles_check = []
-    for a in data:
-        words = a[0].replace('\xa0', '').replace(',', ' ')
-        naics = [s for s in words.split() if s.isdigit()]
-        naics = " ".join(naics)
-        name = [s for s in words.split() if not s.isdigit()]
-        name = " ".join(name)
-        if name in doubles_check:
-            cat = int("".join(naics[0:2]))
-            name = name + f" ({NAICS_CAT[cat]})"
-        else:
-            doubles_check.append(name)
-        cols.append([name, naics, a[1], 100*(float(a[3]) / float(a[1]))])
+    df = pd.DataFrame(rows)
+    df.to_csv("bno_raw.csv")
+    return df
 
-    with open("../flask/static/data/b_o_data.csv", "w", newline='') as fi:
-        writer = csv.writer(fi)
-        writer.writerows(cols)
+def clean_raw(df):
+    # Remove whitespace
+    df["IndustryNaics"] = df.apply(lambda row: row["IndustryNaics"].replace('\xa0', '').replace(',', ' '), axis=1)
+    # Split out NAICS number
+    df["NAICS"] = df.apply(lambda row: re.findall(r"\d+", row["IndustryNaics"]), axis=1)
+    df["IndustryName"] = df.apply(lambda row: " ".join(re.findall("[a-zA-Z]+", row["IndustryNaics"])), axis=1)
+    df["TaxRate"] = df["BNOTax"] / df["GrossRevenue"]
+    
+    # Non-unique industry names that need the parens to make unique
+    vals = df["IndustryName"].value_counts() 
+    vals = list(vals[vals >=2].keys())
+    df = df.reset_index()
+    for name in vals: 
+        df_name = df[df["IndustryName"]==name]
+        for idx, row in df_name.iterrows():
+            n = row["NAICS"][0][:2] 
+            full_name = row["IndustryName"] + " (" +  NAICS_CAT.get(int(n)) + ")"
+            df.loc[row["index"], "IndustryName"] = full_name
 
+    df = df.drop(["IndustryNaics", "index"], axis=1)
 
-_get_data(URL)
+    return df
+
+if __name__ == "__main__":
+    df_raw = _get_data(URL)
+    df = clean_raw(df_raw)
+    df.to_csv("../flask/static/data/b_o_data.csv")
