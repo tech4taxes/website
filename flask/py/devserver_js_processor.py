@@ -24,7 +24,7 @@ def _get_asset_manifest() -> dict[str, dict]:
     Get the asset manifest (in website/.vite/manifest.json)
     """
     with open(
-        os.path.join(current_app.root_path, ".vite", "manifest.json"),
+        os.path.join(current_app.root_path, "static", ".vite", "manifest.json"),
         "r",
         encoding="utf-8",
     ) as file:
@@ -82,7 +82,7 @@ def module_style_processor(request, name: str) -> Markup:
     )
 
     for css in chunk["css"]:
-        dist_path = css
+        dist_path = "static/" + css
         url = urllib.parse.urljoin(base_path, dist_path)
         result += f'<link rel="stylesheet" href="{url}">'
 
