@@ -1,11 +1,10 @@
 """ b_o_data.py -
 Scrape Washington Business & Occupation tax data & wrangle it into a nice shape.
 """
+import re
 import requests
-import csv
 from bs4 import BeautifulSoup
 import pandas as pd
-import re
 
 URL = (
     "https://apps.dor.wa.gov/ResearchStats/Content/QuarterlyBusinessReview/"
@@ -76,7 +75,7 @@ def clean_raw(df):
     vals = list(vals[vals >=2].keys())
     df = df.reset_index()
     for name in vals: 
-        df_name = df[df["IndustryName"]==name]
+        df_name = df[df["IndustryName"] == name]
         for idx, row in df_name.iterrows():
             n = row["NAICS"][0][:2] 
             full_name = row["IndustryName"] + " (" +  NAICS_CAT.get(int(n)) + ")"
