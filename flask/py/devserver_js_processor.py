@@ -59,7 +59,7 @@ def module_path_processor(request, name: str) -> str:
         urllib.parse.urlsplit(request.url)[:2] + ("", "", "")
     )
 
-    return urllib.parse.urljoin(base_path, chunk["file"])
+    return urllib.parse.urljoin(base_path, "static/" + chunk["file"])
 
 
 def module_style_processor(request, name: str) -> Markup:
