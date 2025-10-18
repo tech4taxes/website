@@ -53,14 +53,19 @@ fi
 cd flask
 
 echo "Setting up Node.js"
-nvm install 22
-nvm use 22
+node_version="22"
+nvm install "$node_version"
+nvm use "$node_version"
 npm install
 
 # --- Python setup ---
 echo "Setting up Python"
-pyenv install -s 3.13
-pyenv local 3.13
+py_version="3.13.0"
+if ! pyenv install --list | grep -q "$py_version"; then
+    pyenv update
+fi
+pyenv install -s "$py_version"
+pyenv local "$py_version"
 
 # --- Virtual environment setup ---
 echo "Activating Python virtual environment..."
