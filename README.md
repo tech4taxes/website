@@ -13,32 +13,13 @@ This project uses python (flask/uwsgi), javascript/typescript (vite), and docker
 
 The Makefile in the root folder has some commands that set up the flask web server (flask-dev & uwsgi-dev), vite dev server (vite-dev) and run them locally.
 
-First, ensure that you have the correct python version installed: 
-```
-python3 --version
-```
-Should return python12 or greater. If not, please [upgrade your python version](https://www.python.org/downloads/) before proceeding.
+To setup and install all deps locally, run
 
-We use a python virtualenv in the `flask/` folder to run the flask app, set up with:
-
-```
- python3 -m venv flask
- cd flask
- source bin/activate
- pip install -r requirements.txt
- deactivate
- cd ..
- make flask-dev
+``` sh
+make install
 ```
 
-We use npm under that same folder (`flask/`), set up with:
-```
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-.  "$HOME/.nvm/nvm.sh"
-nvm install 22
-npm install
-npm run build  # this builds the production assets so may not be necessary for local dev!
-```
+NVM and pyevn are used to manage python and node versions for this project. The setup script will make sure those are installed and then install the correct language versions for the project.
 
 ## docker setup
 For docker, I've included a few make targets, notably `docker-build` and `docker-up`.
@@ -82,6 +63,8 @@ make flask-dev
 # In another terminal:
 make vite-dev
 ```
+
+The website will be running on `localhost:8000` (the flask server port).
 
 If you need to test against the prod setup (particularly against bundled javascript) - you can use `make flask-prod` which passes `FLASK_ENV=PROD`- this will make it serve javascript from an `npm run build` output rather than the vite devserver. For this case, you only need to run the flask server - no separate process for vite.
 
