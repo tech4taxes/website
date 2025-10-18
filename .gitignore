@@ -9,6 +9,6 @@ flask/.vite/
 flask/node_modules/
 .vite
 package-lock.json
-flask/static/dist
+dist
 **/.DS_STORE
 node_modules
