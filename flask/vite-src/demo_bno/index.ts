@@ -55,14 +55,14 @@ const really_big_color_list = Array(10).fill(D3Colors).flat()
 dfd.readCSV("../../static/data/b_o_data.csv") //assumes file is in CWD
   .then(df => {
 
-    df.sortValues("PERCENTAGE_PAID", {inplace:true})
+    df.sortValues("TaxRate", {inplace:true})
     const head = df.head()
     const tail = df.tail()
 
     const woohoo: Plotly.BarData[] = [
       {
-        x: head.Name.values.concat(tail.Name.values),
-        y: head.PERCENTAGE_PAID.values.concat(tail.PERCENTAGE_PAID.values),
+        x: head.IndustryName.values.concat(tail.IndustryName.values),
+        y: head.TaxRate.values.concat(tail.TaxRate.values),
         type: 'bar',
         marker: { color: really_big_color_list },
       },
@@ -77,9 +77,9 @@ dfd.readCSV("../../static/data/b_o_data.csv") //assumes file is in CWD
     // Scatterplot of revenue to pct paid
     const container2 = document.getElementById("container2");
     Plotly.newPlot(container2, [{
-      x: df.TOTAL_REVENUE.values,
-      y: df.PERCENTAGE_PAID.values,
-      text: df.Name.values,
+      x: df.GrossRevenue.values,
+      y: df.TaxRate.values,
+      text: df.IndustryName.values,
       marker: { color: really_big_color_list},
       type: 'scatter',
       mode: 'markers',
