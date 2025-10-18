@@ -18,7 +18,7 @@ export default defineConfig({
             preserveEntrySignatures: "strict",
             commonjsOptions: { transformMixedEsModules: true },
         },
-        outDir: "",
+        outDir: "build",
         emptyOutDir: false,
         assetsDir: "static/dist",
     },
