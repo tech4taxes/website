@@ -51,12 +51,10 @@ body {
 /* Image Styling */
 .logo-icon {
   /* Adjust size as needed */
-  display: block;
-  margin: 0 auto;
-  position: relative;
-  bottom: -4vw;
-  left: -12vw;
   width: 20%;
+  position: relative;
+  top: 4vw;
+  justify-content: center;
 }
 
 /* Heading Text Styling: Applying Rubik Bold */
@@ -176,15 +174,6 @@ footer {
   }
 }
 
-/* Nav bar, everything below is copied from Gemini (sorry, kelly) (sue me) */
-.page-header {
-  /* Enables flexible layout to position nav, logo, and title bar */
-  display: flex;
-  align-items: flex-start; /* Aligns all content to the top edge */
-  /* Allows elements to wrap on smaller screens */
-  flex-wrap: wrap;
-}
-
 /* Navigation links positioned on the far left */
 .header-nav {
   display: flex;
@@ -200,7 +189,7 @@ footer {
 .header-nav a {
   text-decoration: none;
   color: #333; /* Dark gray for visibility */
-  padding: 4px 0;
+  padding: 4px 4vw;
   transition: color 0.2s ease-in-out;
 }
 
@@ -214,9 +203,8 @@ footer {
     align-items: center; /* Center everything */
   }
   .header-nav {
-    padding-left: 0; /* Remove left padding when centered */
+    padding-left: 8vw;
     flex-direction: row; /* Display links horizontally on mobile */
-    justify-content: center;
     width: 100%;
     margin-bottom: 0.5vw;
     order: -1; /* Puts navigation at the very top of the stack */
