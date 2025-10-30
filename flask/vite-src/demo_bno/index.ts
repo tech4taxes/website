@@ -89,6 +89,25 @@ dfd.readCSV("../../static/data/b_o_data.csv") //assumes file is in CWD
       // margin: { t: 0 },
       automargin: true,
     });
+
+    const formatter = new Intl.NumberFormat('en-US', {
+	    style: 'currency',
+	    currency: 'USD',
+	    trailingZeroDisplay: "stripIfInteger"
+    })
+    // Table of raw data
+    const container3 = document.getElementById("container3");
+    let rawdf = df.drop({columns: [""]}) // The index is straight up a column named ""
+    rawdf.addColumn("CurrencyTaxable", rawdf.Taxable.apply(formatter.format), {inplace: true})
+    rawdf.addColumn("CurrencyGrossRevenue", rawdf.GrossRevenue.apply(formatter.format), {inplace: true})
+    rawdf.addColumn("CurrencyBNOTax", rawdf.BNOTax.apply(formatter.format), {inplace: true})
+    rawdf = rawdf.drop({columns: ["Taxable", "GrossRevenue", "BNOTax"]})
+    rawdf.rename({"CurrencyTaxable": "Taxable", "CurrencyGrossRevenue": "Gross Revenue", "CurrencyBNOTax": "B&O Tax"}, {inplace: true})
+    const botitle = "Washington State Department of Revenue B&O Quarterly Business Review 2025Q1"
+
+    // "https://apps.dor.wa.gov/ResearchStats/Content/QuarterlyBusinessReview/Results5.aspx?Period=2025Q1&Type=naics&Format=HTML"
+    rawdf.plot(container3).table({layout: {title: botitle}, scrollZoom: true});
+
   }).catch(err=>{
     console.log(err);
 })
