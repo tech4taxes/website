@@ -56,21 +56,68 @@ dfd.readCSV("../../static/data/b_o_data.csv") //assumes file is in CWD
   .then(df => {
 
     df.sortValues("TaxRate", {inplace:true})
-    const head = df.head()
-    const tail = df.tail()
 
-    const woohoo: Plotly.BarData[] = [
-      {
-        x: head.IndustryName.values.concat(tail.IndustryName.values),
-        y: head.TaxRate.values.concat(tail.TaxRate.values),
-        type: 'bar',
-        marker: { color: really_big_color_list },
+    const xvals = df.apply(
+      (row) => {
+        return row[5];
       },
+      {axis: 1},
+    ).values;
+
+    const initial_columns = [
+      "Hospitals",
+      "Semiconductors",
+      "Home Health Care",
+      "Social Services Day Care",
+      "Personal Care barber Beauty Etc",
+      "Aircraft Aerospace Parts",
+      "Software",
     ];
 
+    const yvals = df.apply(
+      (row) => {
+        return row[6];
+      },
+      {axis: 1},
+    ).values;
+
+    const bno_bars = []
+    for (let i = 0; i < xvals.length; ++i) {
+      let is_visible = 'legendonly';
+      const industryname = xvals[i] as string
+      if (initial_columns.includes(industryname)) {
+        is_visible = 'true';
+      }
+      bno_bars.push(
+        {
+          x: [industryname],
+          y: [yvals[i]],
+          type: 'bar',
+          legendgroup: industryname,
+          showlegend: true,
+          name: industryname,
+          visible: is_visible
+        }
+      )
+    }
+
     const container1 = document.getElementById("container1");
-    Plotly.newPlot(container1, woohoo, {
-      title: {text: "B&O Numbers Top 5 & Bottom 5"},
+    Plotly.newPlot(container1, bno_bars, {
+      title: {text: "B&O Tax: Tax Rate by Industry Name"},
+      visible: "legendonly",
+      showlegend: true,
+      xaxis: {
+        title: {
+          text: 'Industry Name',
+        },
+       showticklabels: false
+      },
+      yaxis: {
+        title: {
+          text: 'Tax Rate paid (% Tax Paid / Gross Revenue)',
+        },
+        tickformat: '.2%'
+      },
     });
 
 

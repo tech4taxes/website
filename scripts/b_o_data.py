@@ -69,15 +69,15 @@ def clean_raw(df):
     df["NAICS"] = df.apply(lambda row: re.findall(r"\d+", row["IndustryNaics"]), axis=1)
     df["IndustryName"] = df.apply(lambda row: " ".join(re.findall("[a-zA-Z]+", row["IndustryNaics"])), axis=1)
     df["TaxRate"] = df["BNOTax"] / df["GrossRevenue"]
-    
+
     # Non-unique industry names that need the parens to make unique
-    vals = df["IndustryName"].value_counts() 
+    vals = df["IndustryName"].value_counts()
     vals = list(vals[vals >=2].keys())
     df = df.reset_index()
-    for name in vals: 
+    for name in vals:
         df_name = df[df["IndustryName"] == name]
-        for idx, row in df_name.iterrows():
-            n = row["NAICS"][0][:2] 
+        for _, row in df_name.iterrows():
+            n = row["NAICS"][0][:2]
             full_name = row["IndustryName"] + " (" +  NAICS_CAT.get(int(n)) + ")"
             df.loc[row["index"], "IndustryName"] = full_name
 
