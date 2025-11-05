@@ -1,0 +1,6 @@
+{% macro render_page_preview(page) %}
+    <div class="preview-card" style="margin-top: 1.4vw; margin-bottom: 1.4vw">
+        <h3><a href="{{ page.url }}">{{ page.title }}</a></h3>
+        <p class="longp">{{ page.summary }}... <a href="{{ page.url }}">Read more</a></p>
+    </div>
+{% endmacro %}
