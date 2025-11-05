@@ -22,14 +22,13 @@
 body {
   text-align: center;
   font-family: "Work Sans";
-  font-style: normal;
-  font-size: 0;
   font-variant: unset;
   text-transform: none;
   text-wrap-mode: wrap;
   white-space-collapse: preserve;
   overflow-wrap: break-word;
 }
+
 /* Full Header Container */
 .page-header {
     width: 100%; 
@@ -60,10 +59,8 @@ body {
 .logo-text {
     /* Apply the Rubik font family */
     font-family: 'Rubik', sans-serif; 
-    
     /* Set the specific Bold weight */
     font-weight: 700; 
-    
     color: white;
     font-size: 4.2vw;
     margin: 0; 
@@ -81,8 +78,12 @@ strong {
   font-weight: 700;
 }
 
+em {
+  font-style: italic;
+}
+
 main {
-    padding: 1.4vw;
+    padding: 2vw;
 }
 
 p {

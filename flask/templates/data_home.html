@@ -1,0 +1,29 @@
+{% extends "base.html.jinja" %}
+{% import "macros.html" as macros %}
+
+{% block posthead %}
+<script type="module" src="{{ get_module_path(request, 'demo_bno') }}"></script>
+{% endblock %}
+
+{% block content %}
+<main>
+<h1>Factsheets and Resources</h1>
+<p class="longp">
+Tax policy can seem unapproachable. With these factsheets, we hope to create easy-to-reference, data-backed articles that support our <a href="{{ url_for('leg_agenda') }}">Legislative Agenda</a>
+
+
+</p>
+
+<div class="page-previews">
+    {% for page in pages %}
+        {{ macros.render_page_preview(page) }}
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+    {% else %}
+        <p>No pages found for preview.</p>
+    {% endfor %}
+</div>
+
+</main>
+{% endblock %}

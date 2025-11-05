@@ -5,8 +5,34 @@
 {% endblock %}
 
 {% block content %}
-<h1> Business and Occupation Taxes Paid in WA in Q1 2025. </h2>
+<main>
+<h1>Washington's B&O Tax Doesn't Make Sense</h1>
+<p class="longp">
+In most states, businesses and indivuals both pay some version of an <em>income tax</em>. For businesses, this means paying tax as a percentage of profits; the amount of money a business has left after accounting for expenses. 
+
+In Washington, we do not have a state income tax. In it's place, businesses pay a "Business and Occupation" tax, which is calculated as a percentage of <em>gross revenue</em>. It's easy to imagine how a tax like this could end up being pretty regressive. In Washington, it's possible that a business that makes no profit - or nets a loss - would still have to pay as much tax as anyone else.
+
+In an attempt to account for this economic harm, lawmakers have passed dozens of tax incentives over the decades, creating a complicated and difficult to navigate tax structure (<a href="https://dor.wa.gov/taxes-rates/tax-incentives/tax-incentive-programs">WA Department of Revenue</a>. Theoretically, these changes would decrease the tax burden on businesses that can't afford it, like those with small profit margins. 
+
+In reality, it's a mixed bag. Due to a variety of factors - including corporate lobbying, macro-economic changes, and political will - we're left with a B&O tax that looks like swiss cheese. Industries like Aerospace Parts Manufacturing are paying almost nothing in taxes, while others like Home Health Care Services are paying one of the highest rates in the state.
+
+We've created a couple of charts to help visualize this problem, with data compiled from the <a href="https://github.com/tech4taxes/website/blob/main/scripts/b_o_data.py">WA DOR Quarterly Business Review for 2025Q1.</a> 
+
+In the bar chart below, scroll through the industries on the right to compare and contrast their respective tax rates. Do any of these numbers surprise you? 
+
+</p>
 <div id="container1"></div>
+<p class="longp">
+This next chart gives a broader view of the B&O tax. Here, each dot represents a different industry - and you can hover over a dot to see the name. It's position in the chart represents what the the B&O tax rate paid by that industry was, as a function of that industry's total revenue.
+
+What's interesting about this chart? Based on where the dots land, we can see that some of the highest tax rates in our state are paid by industries that make the least gross revenue, and industries making <em>billions of dollars</em> per quarter, are paying relatively low rates. Although there's many factors at play here, and certainly more nuance, this chart makes it clear that the B&O tax isn't particularly progressive.
+
+</p>
 <div id="container2"></div>
-<div id="container3"></div>
+
+<p class="longp">
+The data makes it clear: there's at a lot of room for improvement in Washington's B&O tax. Check out our <a href="{{ url_for('leg_agenda') }}">Legislative Agenda</a> about progressive solutions we support. 
+
+</p>
+</main>
 {% endblock %}

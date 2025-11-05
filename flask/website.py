@@ -44,9 +44,25 @@ def create_app():
     def demo_plotly():
         return render_template("demo_plotly.html")
 
-    @app.route("/demo/bno")
+    @app.route("/washingtons_bno_tax")
     def demo_bno():
         return render_template("demo_bno.html")
+
+    @app.route("/factsheets")
+    def data_home():
+        pages_data = [
+            {
+                "title": "Washington's B&O Tax Doesn't Make Sense",
+                "summary": "How does Washington's Business & Occupation tax work, and what makes it so regressive?",
+                "url": "/washingtons_bno_tax",
+            },
+            {
+                "title": "3 Myths Tech Companies Want You To Believe About Taxes",
+                "summary": "We've broken down three of the most common myths about tech and taxes, and countered them with the facts.",
+                "url": "/three_myths_tech_companies",
+            }
+        ]
+        return render_template("data_home.html", pages=pages_data)
 
     return app
 

@@ -6,50 +6,20 @@ import * as Plotly from 'plotly.js/dist/plotly';
 import * as dfd from 'danfojs';
 
 
-const D3Colors = [
-  '#1f77b4',
-  '#ff7f0e',
-  '#2ca02c',
-  '#d62728',
-  '#9467bd',
-  '#8c564b',
-  '#e377c2',
-  '#7f7f7f',
-  '#bcbd22',
-  '#17becf',
-  '#1f77b4',
-  '#ff7f0e',
-  '#2ca02c',
-  '#d62728',
-  '#9467bd',
-  '#8c564b',
-  '#e377c2',
-  '#7f7f7f',
-  '#bcbd22',
-  '#17becf',
-  '#1f77b4',
-  '#ff7f0e',
-  '#2ca02c',
-  '#d62728',
-  '#9467bd',
-  '#8c564b',
-  '#e377c2',
-  '#7f7f7f',
-  '#bcbd22',
-  '#17becf',
-  '#1f77b4',
-  '#ff7f0e',
-  '#2ca02c',
-  '#d62728',
-  '#9467bd',
-  '#8c564b',
-  '#e377c2',
-  '#7f7f7f',
-  '#bcbd22',
-  '#17becf'
-];
+function generateRandomOrangeColor(): string {
+    const red = Math.floor(Math.random() * 56) + 200; 
+    const green = Math.floor(Math.random() * 66) + 100; 
+    const blue = Math.floor(Math.random() * 51) + 0; 
 
-const really_big_color_list = Array(10).fill(D3Colors).flat()
+    // Convert RGB values to hexadecimal and pad with leading zeros if necessary
+    const toHex = (c: number): string => {
+        const hex = c.toString(16);
+        return hex.length === 1 ? "0" + hex : hex;
+    };
+
+    return `#${toHex(red)}${toHex(green)}${toHex(blue)}`;
+}
+
 
 // Load bno data:
 dfd.readCSV("../../static/data/b_o_data.csv") //assumes file is in CWD
@@ -81,6 +51,7 @@ dfd.readCSV("../../static/data/b_o_data.csv") //assumes file is in CWD
       {axis: 1},
     ).values;
 
+    const pointColors = df.GrossRevenue.values.map(() => generateRandomOrangeColor())
     const bno_bars = []
     for (let i = 0; i < xvals.length; ++i) {
       let is_visible = 'legendonly';
@@ -96,25 +67,35 @@ dfd.readCSV("../../static/data/b_o_data.csv") //assumes file is in CWD
           legendgroup: industryname,
           showlegend: true,
           name: industryname,
-          visible: is_visible
+          visible: is_visible,
+          marker: {
+            color: generateRandomOrangeColor()
+          }
         }
       )
     }
 
     const container1 = document.getElementById("container1");
     Plotly.newPlot(container1, bno_bars, {
-      title: {text: "B&O Tax: Tax Rate by Industry Name"},
+      title: {
+        text: "B&O Tax: Tax Rate by Industry Name", 
+        font: {size: 20}
+      },
       visible: "legendonly",
       showlegend: true,
       xaxis: {
         title: {
           text: 'Industry Name',
+          standoff: 10,
+          font: {size: 20},
         },
-       showticklabels: false
+        automargin: true,
       },
       yaxis: {
         title: {
-          text: 'Tax Rate paid (% Tax Paid / Gross Revenue)',
+          text: 'Tax Rate',
+          standoff: 10,
+          font: {size: 20},
         },
         tickformat: '.2%'
       },
@@ -127,14 +108,32 @@ dfd.readCSV("../../static/data/b_o_data.csv") //assumes file is in CWD
       x: df.GrossRevenue.values,
       y: df.TaxRate.values,
       text: df.IndustryName.values,
-      marker: { color: really_big_color_list},
+      marker: {color: pointColors},
       type: 'scatter',
       mode: 'markers',
     }],
       {
-      title: {text: "Scatterplot Percentage paid vs. Revenue"},
-      // margin: { t: 0 },
+      title: {
+        text: "Scatterplot Tax Rate paid vs. Gross Revenue",
+        font: {size: 20},
+      },
       automargin: true,
+      xaxis: {
+        title: {
+          text: 'Gross Revenue',
+          standoff: 10,
+          font: {size: 20},
+        },
+        automargin: true,
+      },
+      yaxis: {
+        title: {
+          text: 'Tax Rate',
+          standoff: 10,
+          font: {size: 20},
+        },
+        tickformat: '.2%'
+      },
     });
 
     const formatter = new Intl.NumberFormat('en-US', {

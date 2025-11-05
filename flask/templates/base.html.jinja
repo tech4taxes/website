@@ -22,8 +22,9 @@
 <body lang="en">
 <header class="page-header">
 <nav class="header-nav">
-  <a href="{{ url_for('hello_world') }}" class="nav-link">Home</a>
-  <a href="{{ url_for('leg_agenda') }}" class="nav-link">Legislative Agenda</a>
+  <a href="{{ url_for('hello_world') }}" class="nav-link">Home</a> |
+  <a href="{{ url_for('leg_agenda') }}" class="nav-link">Legislative Agenda</a> |
+  <a href ="{{url_for('data_home')}}" class="nav-link">Factsheets & Resources</a>
 </nav>
 <img loading="lazy" src={{ url_for('static', filename="assets/images/lb_orange.webp") }} alt="Load Balancer Icon" class="logo-icon"><div class="logo-bar"><h1 class="logo-text">TECH 4 TAXES</h1></div></header>
 
