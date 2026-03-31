@@ -32,6 +32,10 @@ def create_app():
     def leg_agenda():
         return render_template("legislative_agenda.html")
 
+    @app.route("/endorsements")
+    def endorsements():
+        return render_template("endorsements.html")
+
     @app.route("/three_myths_tech_companies")
     def myths():
         return render_template("three_myths.html")

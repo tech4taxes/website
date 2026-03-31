@@ -108,6 +108,19 @@ p {
   margin: 0 0 0;
 }
 
+.portrait {
+  float: right;
+  height: 16vw;
+  width: 16vw;
+  border-radius: 1vw;
+}
+
+.endorsement-section {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5vw 0 1.5vw;
+}
+
 h1 {
   font-family: "Rubik";
   color: $orange;
@@ -187,17 +200,17 @@ footer {
   flex-direction: row; /* Stacks the links horizontally */
   align-items: flex-start;
   justify-content: center;
-  gap: 1.4vw;
-  padding-left: 2vw; /* Space from the left edge of the screen */
+  gap: 1vw;
+  padding-left: 1vw; /* Space from the left edge of the screen */
   font-family: "Work Sans", sans-serif;
-  font-size: 2.3vw;
+  font-size: 2vw;
   font-weight: 500;
 }
 
 .header-nav a {
   text-decoration: none;
   color: #333; /* Dark gray for visibility */
-  padding: 4px 4vw;
+  padding: 4px 3vw;
   transition: color 0.2s ease-in-out;
 }
 
