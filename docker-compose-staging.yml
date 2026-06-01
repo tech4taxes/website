@@ -25,7 +25,7 @@ services:
 
 
   t1t:
-    image: ghcr.io/tech4taxes/website:tech4taxes-website-staging-latest
+    image: ghcr.io/tech4taxes/website:tech4taxes-website-latest-staging
     ulimits:
       nofile:
         soft: 1000  # Soft limit for open file descriptors
