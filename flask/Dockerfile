@@ -34,4 +34,4 @@ ENV FLASK_ENV=PROD
 
 EXPOSE 8000
 
-CMD ["flask/website.py"]
+CMD ["website.py"]
