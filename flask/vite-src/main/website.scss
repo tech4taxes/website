@@ -1,4 +1,6 @@
 $orange: rgb(255, 87, 34);
+$lite-orange: rgb(255, 90, 0);
+$dark-orange: rgb(252, 19, 3);
 
 /* Resetting browser-specific margins and shit */
 * {
@@ -79,7 +81,7 @@ a {
 }
 
 a:hover {
-  color: #fc1303;
+  color: $dark-orange;
 }
 
 strong {
@@ -129,7 +131,7 @@ h1 {
 }
 
 h1 a:hover {
-  color: #fc1303;
+  color: $dark-orange;
 }
 
 h2 {
@@ -144,7 +146,7 @@ h2 {
 }
 
 h2 a:hover {
-  color: #fc1303;
+  color: $dark-orange;
 }
 
 h3 {
@@ -156,7 +158,7 @@ h3 {
 }
 
 h3 a:hover {
-  color: #fc1303;
+  color: $dark-orange;
 }
 
 .subheading {
