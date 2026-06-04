@@ -1,5 +1,5 @@
 # Use the official Python 3.8 slim image as the base image
-FROM python:3.12-slim
+FROM python:3.12-slim AS builder
 
 # Set the working directory within the container
 WORKDIR /api-flask
