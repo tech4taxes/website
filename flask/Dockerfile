@@ -24,6 +24,8 @@ WORKDIR /api-flask
 # Copy virtual environment from builder
 COPY --from=builder /api-flask /api-flask
 COPY --from=builder /packages /packages
+COPY --from=builder /usr/local/lib /usr/local/lib
+COPY --from=builder /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
 
 # Set environment variables for Python
 ENV PYTHONPATH=/packages
