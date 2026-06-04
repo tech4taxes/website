@@ -30,8 +30,8 @@ ENV PYTHONPATH=/packages
 ENV PATH="/api-flask:$PATH"
 ENV PYTHONUNBUFFERED=1
 
-# Expose port 8000 for the Flask application
+ENV FLASK_ENV=PROD
+
 EXPOSE 8000
 
-# Define the command to run the Flask application using uWSGI
-CMD ["-m", "uwsgi", "--http", "0.0.0.0:8000", "-p", "1", "--master", "-w", "website:app"]
+CMD ["flask/website.py"]
