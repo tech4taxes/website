@@ -11,11 +11,22 @@ RUN apt update
 RUN apt install -y uwsgi libexpat1 curl
 
 # Install nvm / node / npm
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash && .  "$HOME/.nvm/nvm.sh" && nvm install 22 && npm install && npm run build
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash && . "$HOME/.nvm/nvm.sh" && nvm install 22 && npm install && npm run build
 
 # Upgrade pip and install Python dependencies
 RUN pip3 install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
+# Stage 2: Create minimal runtime image
+FROM gcr.io/distroless/python3
+
+WORKDIR /api-flask
+
+# Copy virtual environment from builder
+COPY --from=builder /api-flask /api-flask
+
+# Set environment variables for Python
+ENV PATH="/api-flask:$PATH"
+ENV PYTHONUNBUFFERED=1
 
 # Expose port 8000 for the Flask application
 EXPOSE 8000
