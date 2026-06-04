@@ -9,6 +9,7 @@ export default defineConfig({
     },
   },
   build: {
+    sourcemap: false,
     manifest: true,
     rollupOptions: {
       input: Object.fromEntries(
