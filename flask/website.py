@@ -1,7 +1,6 @@
 """flask/website.py - Tech4Taxes website flask route/app file."""
 import os
 from flask import Flask, render_template
-import gevent.pywsgi
 
 from py.flask_config import DevelopmentConfig, ProductionConfig
 import py.devserver_js_processor as devserver_js_processor
@@ -72,14 +71,4 @@ def create_app():
     return app
 
 
-if __name__ == "__main__":
-    host = "0.0.0.0"
-    port = 8000
-    app = create_app()
-
-    is_production = os.getenv("FLASK_ENV", "DEV") == "PROD"
-    if is_production:
-        app_server = gevent.pywsgi.WSGIServer((host, port), app)
-        app_server.serve_forever()
-    else:
-        app.run(host=host, port=port)
+app = create_app()
