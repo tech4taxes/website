@@ -6,21 +6,23 @@ on:
 
 permissions:
   contents: read
+  id-token: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
     uses: docker/github-builder/.github/workflows/build.yml@v1
     if: (github.repository == 'tech4taxes/website') && (github.event.label.name == 'staging')
-    permissions:
-      contents: read
-      id-token: write
     with:
       context: flask
       output: image
       push: true
       labels: 'latest'
       platforms: linux/amd64,linux/arm64
-      meta-images: tech4taxes/website
+      meta-images: ghcr.io/tech4taxes/website
       meta-tags: |
         type=ref,event=branch
         type=ref,event=pr
