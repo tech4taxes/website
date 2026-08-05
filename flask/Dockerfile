@@ -1,5 +1,5 @@
-# Use the official Python 3.12 slim image as the base image
-FROM python:3.12-slim AS builder
+# Use the official Python 3.13 slim image as the base image
+FROM python:3.13-slim AS builder
 
 # Set the working directory within the container
 WORKDIR /api-flask
@@ -8,7 +8,8 @@ WORKDIR /api-flask
 ADD . /api-flask/
 
 RUN apt update
-RUN apt install -y curl
+# curl in order to run curl to install node; libatomic1 is a dependency of node as well
+RUN apt install -y curl libatomic1
 
 # Install nvm / node / npm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash && . "$HOME/.nvm/nvm.sh" && nvm install 26 && npm install && npm run build
